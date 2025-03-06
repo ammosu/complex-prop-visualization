@@ -26,6 +26,7 @@ export const PropertyDataProvider = ({ children }) => {
   const [districtData, setDistrictData] = useState([]);
   const [stats, setStats] = useState(null);
   const [fileError, setFileError] = useState("");
+  const [communityName, setCommunityName] = useState("");
 
   // 檔案上傳處理
   const handleFileUpload = (event) => {
@@ -55,6 +56,22 @@ export const PropertyDataProvider = ({ children }) => {
         skipEmptyLines: true,
         complete: (results) => {
           setCsvData(results.data);
+          
+          // 從CSV中提取社區名稱（如果存在）
+          if (results.data.length > 0 && results.data[0]['社區名稱']) {
+            setCommunityName(results.data[0]['社區名稱']);
+          } else {
+            // 如果CSV中沒有社區名稱欄位，嘗試從地址中提取
+            const firstAddress = results.data[0]?.['地址'] || '';
+            // 假設地址格式中可能包含社區名稱，例如：台北市信義區松仁路100號（總太聚作社區）
+            const match = firstAddress.match(/（(.+)）/);
+            if (match && match[1]) {
+              setCommunityName(match[1]);
+            } else {
+              setCommunityName(""); // 如果無法提取，設為空字串
+            }
+          }
+          
           const processedData = processData(results.data);
           if (processedData) {
             setStats(processedData.stats);
@@ -105,7 +122,8 @@ export const PropertyDataProvider = ({ children }) => {
     districtData,
     stats,
     fileError,
-    handleFileUpload
+    handleFileUpload,
+    communityName
   };
 
   return (

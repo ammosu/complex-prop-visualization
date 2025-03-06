@@ -12,13 +12,14 @@ const FilterPanel = () => {
     setFloorFilter, 
     areaSizeFilter, 
     setAreaSizeFilter,
-    districtData
+    districtData,
+    communityName
   } = usePropertyData();
 
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <h3 className="font-bold">總太聚作社區房價分析</h3>
+        <h3 className="font-bold">{communityName ? `${communityName}房價分析` : '房價分析'}</h3>
         <button 
           className="flex items-center text-blue-500"
           onClick={() => setExpandedFilters(!expandedFilters)}
