@@ -33,7 +33,8 @@ export const PropertyDataProvider = ({ children }) => {
     setIsLoading(true);
     setFileError("");
     
-    const file = event.target.files[0];
+    // 處理拖放事件或傳統檔案輸入
+    const file = event.file || (event.target && event.target.files && event.target.files[0]);
     if (!file) {
       setIsLoading(false);
       return;
