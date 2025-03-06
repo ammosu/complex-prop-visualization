@@ -112,7 +112,7 @@ const TrendAnalysisChart = () => {
         {showErrorMetrics && (
           <div className="p-2 bg-gray-100 rounded">
             <p><strong>MAPE (平均絕對百分比誤差)：</strong>衡量估值與實際交易價格的絕對誤差百分比</p>
-            <p><strong>MPE (平均百分比誤差)：</strong>衡量估值與實際交易價格的誤差方向，正值表示低估，負值表示高估</p>
+            <p><strong>MPE (平均百分比誤差)：</strong>衡量估值與實際交易價格的誤差方向，正值表示高估，負值表示低估</p>
           </div>
         )}
       </div>

@@ -38,7 +38,7 @@ export const calculateMPE = (actual, forecast) => {
   
   for (let i = 0; i < actual.length; i++) {
     if (actual[i] === 0 || !actual[i]) continue; // 避免除以零
-    sum += (actual[i] - forecast[i]) / actual[i];
+    sum += (forecast[i] - actual[i]) / actual[i];
     validCount++;
   }
   
